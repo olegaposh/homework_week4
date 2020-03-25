@@ -21,6 +21,8 @@
     //update title - clear old question 
     // for each loop through
 
+    // week 3, number 33 
+
     var startButton = document.getElementById("start-btn");
     var questionsElement = document.getElementById("question-container");
     var questionElement = document.getElementById("question");
@@ -28,7 +30,7 @@
 
     var currentQuestionIndex = 0;
 
-
+    // click start button
     startButton.addEventListener("click", startGame)
 
     function startGame() {
@@ -37,12 +39,12 @@
 
         questionsElement.setAttribute("class", "");
 
-        // ? var questionIndex = 0;
-
         setNextQuestion();
+
+        
         
     };
-
+    // first question
     function setNextQuestion () { 
 
         var currentQuestion = questions[currentQuestionIndex];
@@ -67,13 +69,29 @@
 
     };
 
+    // time counter
+
+    var timerEl = document.querySelector("#countdown");
+
+    function counter() {
+
+        var timeLeft = 30;
+
+        var timeInterval = setInterval (function() {
+            timerEl.textContent = timeLeft;
+            timeLeft--;
+
+        }, 1000);
+
+    };
+
     
 
     var questions = [
         {
-          title: "Commonly used data types DO NOT include:",
-          choices: ["strings", "booleans", "alerts", "numbers"],
-          answer: "alerts"
+          title: "What's Alex's favorite color?",
+          choices: ["blue", "green", "teal", "red"],
+          answer: "teal"
         },
         {
           title: "The condition in an if / else statement is enclosed within ____.",
