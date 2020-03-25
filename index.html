@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link rel="stylesheet" href="./style.css"
+
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3 mt-5">
+                <!--View Highscores -->
+                <h5 class=>View Highscore</h5>
+            </div>
+
+            <div class="col-sm-6">
+                <!-- Title  -->
+                <h1 class="text-center mt-5">QUIZ</h1>
+
+            </div>
+
+            <div class="col-sm-3 mt-5">
+                <!-- Time counter-->
+                <h5>Timer</h5>
+            </div>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-12  mt-5">
+
+                <div id="question-container" class="hide">
+                    
+                    <div id="question">Question</div>
+                    <div id="answers">
+                        <button class = "btn">Answer 1</button>
+                        <button class = "btn">Answer 2</button>
+                        <button class = "btn">Answer 3</button>
+                        <button class = "btn">Answer 4</button>
+                    </div>
+
+                </div>
+
+                <div class="start-button text-center">
+                    <button id = "start-btn">Start</button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+    <script src="./logic.js"></script>
+    <script src="./question.js"></script>
+    <!-- score .js goes in the highscores html -->
+</body>
+
+</html>
