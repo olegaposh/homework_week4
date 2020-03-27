@@ -1,100 +1,174 @@
-// element for questions, answers, 
 
-// variable for a timer
+var startButton = document.getElementById("start-btn");
+var questionsElement = document.getElementById("question-container");
+var questionElement = document.getElementById("questions");
 
-// variable for the choices
+var timerElement = document.querySelector("#countdown");
 
-// variable start button
+var currentQuestionIndex = 0;
+var timeLeft = 20;
 
-//feedback variable
+// click start button
+startButton.addEventListener("click", startGame)
 
-// function to start the quiz
-    // start timer set interval-text-content
-    // show the starting time
-    // hide the start screen  setAttribute.(class.hide);
-    // removeAttribute
+function startGame() {
 
-//function get the new question
-    // section title to update question 
-    //clear answers
-    // get current object question from an array
-    //update title - clear old question 
-    // for each loop through
+    startButton.setAttribute("class", "hide");
 
-    // week 3, number 33 
+    questionsElement.setAttribute("class", "");
 
-    var startButton = document.getElementById("start-btn");
-    var questionsElement = document.getElementById("question-container");
-    var questionElement = document.getElementById("question");
-    var answersElement = document.getElementById("answers");
+    createButtons();
+    // Defines .choice elements
+    setNextQuestion();
 
-    var currentQuestionIndex = 0;
+    // For loop implementation
+    // for (var i = 0; i < choices.length; i++) {
+    //     choices[i].addEventListener('click', function (event) {
+    //         selectAnswer(event);
+    //     });
+    // }
 
-    // click start button
-    startButton.addEventListener("click", startGame)
+    // For each implementation
+    // choices.forEach(function(item) {
+    //     item.addEventListener('click', function(event) {
+    //         selectAnser(event);
+    //     });
+    // });
 
-    function startGame() {
+    counter();
 
-        startButton.setAttribute("class", "hide");
+};
+// first question 
+// for loop goes here? 
+function setNextQuestion() {
 
-        questionsElement.setAttribute("class", "");
+    var currentQuestion = questions[currentQuestionIndex];
+    var displayTitle = document.getElementById("questions");
+    displayTitle.children[0].textContent = currentQuestion.title;
 
-        setNextQuestion();
+    //displayTitle.textContent = currentQuestion.title;
+    // currentQuestion.choices.forEach(function(choice, i) {
 
-        
-        
-    };
-    // first question
-    function setNextQuestion () { 
+    //     var choiceButton = document.createElement("button");
+    //     choiceButton.setAttribute("class", "choice");
+    //     choiceButton.setAttribute("value", choice);
+    //     choiceButton.textContent = i + 1 + ". " + choice;
+    //     choiceButton.onclick = selectAnswer;
+    //     displayTitle.appendChild(choiceButton);
 
-        var currentQuestion = questions[currentQuestionIndex];
-        var displayTitle = document.getElementById("question");
-        displayTitle.textContent = currentQuestion.title;
-        answersElement.innerHTML = "";
-        currentQuestion.choices.forEach(function(choice, i) {
+    // });
 
-            var choiceButton = document.createElement("button");
-            choiceButton.setAttribute("class", "choice");
-            choiceButton.setAttribute("value", choice);
-            choiceButton.textContent = i + 1 + ". " + choice;
-            choiceButton.onclick = selectAnswer;
-            displayTitle.appendChild(choiceButton);
-3
-        });
-    };
+    var choices = document.querySelectorAll(".choice");
+    console.log(choices);
+    // Creating buttons
+    // Setting button values
+    for (var i = 0; i < currentQuestion.choices.length; i++) {
+        //var choiceButton = document.createElement("button");
+        //choiceButton.setAttribute("class", "choice");
+        choices[i].setAttribute("value", currentQuestion.choices[i]);
+        choices[i].textContent = i + 1 + ". " + currentQuestion.choices[i];
+        //displayTitle.appendChild(choiceButton);
+    }
 
-
-    function selectAnswer () {
+};
 
 
-    };
+// first question 
+// for loop goes here? 
+function createButtons() {
 
-    // time counter
+    var currentQuestion = questions[currentQuestionIndex];
+    var displayTitle = document.getElementById("questions");
 
-    var timerEl = document.querySelector("#countdown");
+    // Create empty span element to hold question title
+    var span = document.createElement("span");
+    displayTitle.appendChild(span);
 
-    function counter() {
+    console.log(displayTitle);
+    for (var i = 0; i < currentQuestion.choices.length; i++) {
+        var choiceButton = document.createElement("button");
+        choiceButton.setAttribute("class", "choice");
+        choiceButton.onclick = selectAnswer;
+        // choiceButton.setAttribute("value", currentQuestion.choices[i]);
+        // choiceButton.textContent = i + 1 + ". " + currentQuestion.choices[i];
+        // choiceButton.onclick = selectAnswer;
+        displayTitle.appendChild(choiceButton);
+        console.log("Created button ", i);
+        var choices = document.querySelectorAll(".choice");
+        console.log(choices);
+    }
 
-        var timeLeft = 30;
+};
 
-        var timeInterval = setInterval (function() {
-            timerEl.textContent = timeLeft;
-            timeLeft--;
+// Ill probably need something like this
+function selectAnswer(event) {
+    console.log(event.target.value);
+    if (event.target.value !== questions[currentQuestionIndex].answer) {
+        timeLeft = timeLeft - 3;
+        // timer
+        // next question
+        //disappears question
+    }
+    currentQuestionIndex++;
+    setNextQuestion();
+};
 
-        }, 1000);
 
-    };
+//time counter
+
+
+function counter() {
 
     
 
-    var questions = [
-        {
-          title: "What's Alex's favorite color?",
-          choices: ["blue", "green", "teal", "red"],
-          answer: "teal"
-        },
-        {
-          title: "The condition in an if / else statement is enclosed within ____.",
-          choices: ["quotes", "curly brackets", "parentheses", "square brackets"],
-          answer: "parentheses"
-        }]; 
+    var timeInterval = setInterval(function () {
+        timerElement.textContent = timeLeft;
+        timeLeft--;
+
+        if (timeLeft === 0) {
+
+            timerElement.textContent = "";
+
+            clearInterval(timeInterval);
+
+            // calling some function here
+        }
+
+    }, 1000);
+
+};
+
+
+
+var questions = [
+    {
+        title: "What's Alex's favorite color?",
+        choices: ["blue", "green", "teal", "red"],
+        answer: "teal"
+    },
+    {
+        title: "What is SpongeBob's favorite activity?",
+        choices: ["jelly fishing", "driving", "blowing bubbles", "cooking"],
+        answer: "jelly fishing"
+    },
+    {
+        title: "You're in 3rd place, what place are you in when you pass the person in 2nd place?",
+        choices: ["1st", "2nd", "3rd", "none of the above"],
+        answer: "2nd"
+    },
+    {
+        title: "How fast does the earth spin?",
+        choices: ["100 mph", "1000 mph", "10,000 mph", "earth is flat"],
+        answer: "1000 mph"
+    },
+    {
+        title: "What's Alex's favorite hobby?",
+        choices: ["music", "jelly fishing", "bowling", "surfing"],
+        answer: "music"
+    },
+];
+
+
+
+
+

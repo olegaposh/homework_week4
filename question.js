@@ -16,5 +16,3 @@ The following animation demonstrates the application functionality:
 
 //One object that stores all questions in a variable
 
-
-
