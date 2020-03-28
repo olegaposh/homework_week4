@@ -1,3 +1,9 @@
+// timer needs to stop at 0
+// a flash of correct/wrong text
+// high score info needs to save to browser
+//when time hits 0 take user to the highscore page
+//give the user the score and save it
+
 
 var startButton = document.getElementById("start-btn");
 var questionsElement = document.getElementById("question-container");
@@ -59,7 +65,6 @@ function setNextQuestion() {
     // });
 
     var choices = document.querySelectorAll(".choice");
-    console.log(choices);
     // Creating buttons
     // Setting button values
     for (var i = 0; i < currentQuestion.choices.length; i++) {
@@ -84,7 +89,6 @@ function createButtons() {
     var span = document.createElement("span");
     displayTitle.appendChild(span);
 
-    console.log(displayTitle);
     for (var i = 0; i < currentQuestion.choices.length; i++) {
         var choiceButton = document.createElement("button");
         choiceButton.setAttribute("class", "choice");
@@ -93,16 +97,14 @@ function createButtons() {
         // choiceButton.textContent = i + 1 + ". " + currentQuestion.choices[i];
         // choiceButton.onclick = selectAnswer;
         displayTitle.appendChild(choiceButton);
-        console.log("Created button ", i);
         var choices = document.querySelectorAll(".choice");
-        console.log(choices);
     }
 
 };
 
-// Ill probably need something like this
+// When a user clicks on a button this runs.
 function selectAnswer(event) {
-    console.log(event.target.value);
+    // if they get it wrong
     if (event.target.value !== questions[currentQuestionIndex].answer) {
         timeLeft = timeLeft - 3;
         // timer
@@ -110,34 +112,38 @@ function selectAnswer(event) {
         //disappears question
     }
     currentQuestionIndex++;
+
+    // When the current question is greater than the total number of questions
+    if (currentQuestionIndex >= questions.length) {
+        // Currentscore
+        localStorage.setItem("timeleft", timeLeft);
+        window.location.href="./highscore.html";
+        
+    }
+
+
     setNextQuestion();
 };
 
 
 //time counter
-
-
 function counter() {
-
-    
-
     var timeInterval = setInterval(function () {
         timerElement.textContent = timeLeft;
         timeLeft--;
 
-        if (timeLeft === 0) {
+        if (timeLeft <= 0) {
 
             timerElement.textContent = "";
 
             clearInterval(timeInterval);
-
-            // calling some function here
+            timeLeft = 0;
+            window.location.href="./highscore.html";
         }
 
     }, 1000);
 
 };
-
 
 
 var questions = [
@@ -165,7 +171,7 @@ var questions = [
         title: "What's Alex's favorite hobby?",
         choices: ["music", "jelly fishing", "bowling", "surfing"],
         answer: "music"
-    },
+    }
 ];
 
 
