@@ -7,53 +7,60 @@
     <title>Quiz</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style.css">
 
 </head>
 
 <body>
-
+    <header class="text-center">
+        <a class="float-right" href="./highscore.html">
+            <h3>View High Scores</h3>
+        </a>
+    </header>
     <div class="container">
-        <div class="row">
-            <div class="col-sm-3 mt-5">
-                <!--View Highscores -->
-                <a href="./highscore.html">High Scores</a>
-            </div>
-
-            <div class="col-sm-6">
-                <!-- Title  -->
-                <h1 class="text-center mt-5">QUIZ</h1>
-
-            </div>
-
-            <div class="col-sm-3 mt-5">
-                <!-- Time counter-->
-                <h5 id = "countdown"></h5>
-            </div>
-
-        </div>
-
-        <div class="row">
-
-            <div class="col-sm-12  mt-5">
-
-                <div id="question-container" class="hide">
-                    
-                    <div id="questions"></div>
-    
+        <div class="card m-3 bg-primary">
+            <div class="row">
+                <div class="col-sm-3 mt-5">
+                    <!--View Highscores -->
 
                 </div>
 
-                <div class="start-button text-center">
-                    <button id = "start-btn">Start</button>
+                <div class="col-sm-6">
+                    <!-- Title  -->
+                    <h1 class="text-center mt-5 card-header bg-info">QUIZ</h1>
 
+                </div>
+
+                <div class="col-sm-3 mt-5">
+                    <!-- Time counter-->
+                    <h5 id="countdown"></h5>
                 </div>
 
             </div>
 
+            <div class="row">
+
+                <div class="col-sm-12  mt-5">
+
+                    <div id="question-container" class="hide">
+
+                        <div id="questions"></div>
+
+
+                    </div>
+
+                    <div id="answer-check"></div>
+
+                    <div class="start-button text-center">
+                        <button id="start-btn">Start</button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
-
-
 
     </div>
     <script src="./logic.js"></script>

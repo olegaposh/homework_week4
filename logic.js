@@ -1,18 +1,12 @@
-// timer needs to stop at 0
-// a flash of correct/wrong text
-// high score info needs to save to browser
-//when time hits 0 take user to the highscore page
-//give the user the score and save it
-
 
 var startButton = document.getElementById("start-btn");
 var questionsElement = document.getElementById("question-container");
 var questionElement = document.getElementById("questions");
-
+var answerCheck = document.getElementById("answer-check");
 var timerElement = document.querySelector("#countdown");
 
 var currentQuestionIndex = 0;
-var timeLeft = 20;
+var timeLeft = 30;
 
 // click start button
 startButton.addEventListener("click", startGame)
@@ -27,20 +21,7 @@ function startGame() {
     // Defines .choice elements
     setNextQuestion();
 
-    // For loop implementation
-    // for (var i = 0; i < choices.length; i++) {
-    //     choices[i].addEventListener('click', function (event) {
-    //         selectAnswer(event);
-    //     });
-    // }
-
-    // For each implementation
-    // choices.forEach(function(item) {
-    //     item.addEventListener('click', function(event) {
-    //         selectAnser(event);
-    //     });
-    // });
-
+    
     counter();
 
 };
@@ -52,17 +33,6 @@ function setNextQuestion() {
     var displayTitle = document.getElementById("questions");
     displayTitle.children[0].textContent = currentQuestion.title;
 
-    //displayTitle.textContent = currentQuestion.title;
-    // currentQuestion.choices.forEach(function(choice, i) {
-
-    //     var choiceButton = document.createElement("button");
-    //     choiceButton.setAttribute("class", "choice");
-    //     choiceButton.setAttribute("value", choice);
-    //     choiceButton.textContent = i + 1 + ". " + choice;
-    //     choiceButton.onclick = selectAnswer;
-    //     displayTitle.appendChild(choiceButton);
-
-    // });
 
     var choices = document.querySelectorAll(".choice");
     // Creating buttons
@@ -97,7 +67,6 @@ function createButtons() {
         // choiceButton.textContent = i + 1 + ". " + currentQuestion.choices[i];
         // choiceButton.onclick = selectAnswer;
         displayTitle.appendChild(choiceButton);
-        var choices = document.querySelectorAll(".choice");
     }
 
 };
@@ -107,18 +76,25 @@ function selectAnswer(event) {
     // if they get it wrong
     if (event.target.value !== questions[currentQuestionIndex].answer) {
         timeLeft = timeLeft - 3;
-        // timer
-        // next question
-        //disappears question
+        checkAnswer();
+        answerCheck.innerHTML = "Wrong!!!"
+        
     }
+    else {
+        checkAnswer();
+        answerCheck.innerHTML = "Correct Homeslice!";
+
+
+    }
+
     currentQuestionIndex++;
 
     // When the current question is greater than the total number of questions
     if (currentQuestionIndex >= questions.length) {
         // Currentscore
         localStorage.setItem("timeleft", timeLeft);
-        window.location.href="./highscore.html";
-        
+        window.location.href = "./highscore.html";
+
     }
 
 
@@ -135,15 +111,27 @@ function counter() {
         if (timeLeft <= 0) {
 
             timerElement.textContent = "";
-
+            alert("Your time is up son");
             clearInterval(timeInterval);
             timeLeft = 0;
-            window.location.href="./highscore.html";
+            window.location.href = "./highscore.html";
         }
 
     }, 1000);
 
 };
+
+
+
+function checkAnswer() {
+
+    var checkDaAnswer = setTimeout(function () {
+
+        answerCheck.innerHTML = "";
+    }, 1000);
+}
+
+
 
 
 var questions = [

@@ -3,7 +3,15 @@
 
     display: none;
 }
+body {
 
+	background-color: green;
+}
+
+#questions {
+	display: flex;
+	flex-direction: column;
+}
 
 button {
 	box-shadow: 0px 10px 14px -7px #276873;
@@ -27,4 +35,14 @@ button:hover {
 button:active {
 	position:relative;
 	top:1px;
+}
+li {
+
+	list-style:none
+}
+
+a {
+
+	color:white;
+	
 }
